@@ -10,15 +10,33 @@
 * Первые два нужно приводить к вещественному числу при помощи float(),
   а третий - к целому при помощи int() и перехватывать исключения
   ValueError и TypeError, если приведение типов не сработало.
-    
+
 """
 
-def discounted(price, discount, max_discount=20)
+
+def discounted(price, discount, max_discount=20):
     """
     Замените pass на ваш код
     """
-    pass
-    
+    try:
+        price = float(abs(price))
+        discount = float(abs(discount))
+        max_discount = int(abs(max_discount))
+        if max_discount >= 100:
+            raise ValueError('Слишком большая максимальная скидка')
+        if discount >= max_discount:
+            return price
+        else:
+            return price - (price * discount / 100)
+    except: (ValueError, TypeError)
+    try:
+        price = float(price)
+        discount = float(discount)
+        max_discount = int(max_discount)
+    except (ValueError, TypeError):
+        print('Что-то не так')
+
+
 if __name__ == "__main__":
     print(discounted(100, 2))
     print(discounted(100, "3"))
